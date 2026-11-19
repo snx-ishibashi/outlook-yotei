@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>予定登録</title>
+<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+<style>
+  body { font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif; font-size: 13px; margin: 0; padding: 10px 12px 20px; color: #222; }
+  h1 { font-size: 15px; margin: 0 0 8px; }
+  label.h { display: block; font-weight: 600; margin: 12px 0 4px; }
+  input[type=text], select, textarea { width: 100%; box-sizing: border-box; font-size: 13px; padding: 5px 6px; border: 1px solid #999; border-radius: 3px; }
+  .list { max-height: 160px; overflow-y: auto; border: 1px solid #ddd; border-radius: 3px; margin-top: 4px; }
+  .list:empty { display: none; }
+  .row { display: block; padding: 4px 6px; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
+  .row:hover { background: #eef4fb; }
+  .note { color: #666; padding: 4px 6px; font-size: 12px; }
+  .chip { display: inline-block; background: #e3eefa; border-radius: 12px; padding: 3px 8px; margin-top: 4px; }
+  .x { border: none; background: none; cursor: pointer; color: #555; font-size: 13px; }
+  .preview { background: #f5f5f5; border-radius: 3px; padding: 6px; margin-top: 4px; word-break: break-all; }
+  button.main { width: 100%; margin-top: 16px; padding: 9px; font-size: 14px; background: #0f6cbd; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+  button.main:disabled { background: #8aa; }
+  .status { margin-top: 10px; font-size: 12px; }
+  .status.ok { color: #107c10; }
+  .status.err { color: #c50f1f; }
+  .small { font-size: 12px; color: #666; }
+  a { color: #0f6cbd; }
+</style>
+</head>
+<body>
+  <h1>予定登録</h1>
+
+  <label class="h" for="menu">予定メニュー</label>
+  <select id="menu"><option value="">（読み込み中）</option></select>
+
+  <label class="h" for="companySearch">会社（会社名・よみの一部で検索）</label>
+  <input type="text" id="companySearch" placeholder="例：協和、まちす">
+  <div class="list" id="companyResults"></div>
+  <div id="companySelected"></div>
+
+  <label class="h" for="content">内容</label>
+  <input type="text" id="content" placeholder="例：PCサポート">
+
+  <label class="h">件名（この形で入ります）</label>
+  <div class="preview" id="preview"></div>
+
+  <label class="h" for="peopleSearch">参加者（自分以外）<span id="peopleCount" class="small"></span></label>
+  <input type="text" id="peopleSearch" placeholder="名前で絞り込み">
+  <div class="list" id="peopleResults"></div>
+
+  <label class="h" for="facKind">施設</label>
+  <select id="facKind">
+    <option value="">全施設</option>
+    <option>会議室</option>
+    <option>備品</option>
+  </select>
+  <div class="list" id="facResults"></div>
+
+  <label class="small" style="display:block;margin-top:10px"><input type="checkbox" id="addInfo" checked> 本文に会社の住所・電話を入れる</label>
+
+  <button class="main" id="apply">予定に反映</button>
+  <div class="status" id="status">読み込み中…</div>
+  <p class="small">日時は予定の画面で指定してください。会社や施設の一覧が古いときは <a href="#" id="reload">最新にする</a></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@5.30.0/lib/msal-browser.min.js" integrity="sha384-jZgMryu+4u6YigBEcQY0MnBDCLVoqAGLm8S8PXoaGI2HJWA5XcxSalRmz/KFODUW" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+</html>

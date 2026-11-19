@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+           xsi:type="MailApp">
+  <Id>6f4b2a9e-3c1d-4e8a-9b7f-2d5c8e1a0f43</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>ソニックス株式会社</ProviderName>
+  <DefaultLocale>ja-JP</DefaultLocale>
+  <DisplayName DefaultValue="予定登録"/>
+  <Description DefaultValue="予定メニュー・会社・参加者・施設を選んで予定に反映します"/>
+  <IconUrl DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/icon-128.png"/>
+  <SupportUrl DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/taskpane.html"/>
+  <AppDomains>
+    <AppDomain>https://login.microsoftonline.com</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <FormSettings>
+    <Form xsi:type="ItemEdit">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/taskpane.html"/>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>
+  </Rule>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <FunctionFile resid="Commands.Url"/>
+          <ExtensionPoint xsi:type="AppointmentOrganizerCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="yoteiGroup">
+                <Label resid="Group.Label"/>
+                <Control xsi:type="Button" id="yoteiButton">
+                  <Label resid="Button.Label"/>
+                  <Supertip>
+                    <Title resid="Button.Label"/>
+                    <Description resid="Button.Tip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16" DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/icon-16.png"/>
+        <bt:Image id="Icon.32" DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/icon-32.png"/>
+        <bt:Image id="Icon.80" DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Commands.Url" DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://snx-ishibashi.github.io/outlook-yotei/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Group.Label" DefaultValue="ソニックス"/>
+        <bt:String id="Button.Label" DefaultValue="予定登録"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Button.Tip" DefaultValue="予定メニュー・会社・参加者・施設を選んで、この予定に反映します"/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
